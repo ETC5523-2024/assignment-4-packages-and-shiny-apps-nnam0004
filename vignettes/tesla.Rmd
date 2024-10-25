@@ -1,8 +1,8 @@
 ---
-title: "Using TeslaInvestR"
+title: "Demonstrating the Use of TeslaInvestR"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Using TeslaInvestR}
+  %\VignetteIndexEntry{Demonstrating the Use of TeslaInvestR}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -15,10 +15,6 @@ The `TeslaInvestR` package provides functions and data related to Tesla stock an
 
 You can install the package from GitHub using:
 
-```{r}
-remotes::install_github("nnam0004/TeslaInvestR")
-library(TeslaInvestR)
-```
 
 ## Working with Tesla Stock Data
 
@@ -68,9 +64,9 @@ ggplot(combined_data, aes(x = Date, y = investment_value, color = type)) +
   facet_wrap(~type, scales = "free_y") +  # Facet by the type (Tesla Stock and Tesla Roadster)
   theme_minimal()
 
-
 ```
 
 ## Conclusion
 
 The TeslaInvestR package provides useful data and tools for analyzing the historical trends in Tesla stock and the depreciation of Tesla Roadsters.
+
