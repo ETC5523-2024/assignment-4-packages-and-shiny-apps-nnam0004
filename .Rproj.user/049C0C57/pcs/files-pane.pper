@@ -1,6 +1,10 @@
 {
     "sortOrder": [
         {
+            "columnIndex": 3,
+            "ascending": false
+        },
+        {
             "columnIndex": 4,
             "ascending": false
         },
@@ -9,5 +13,5 @@
             "ascending": true
         }
     ],
-    "path": "~/Semester 2/ETC5523/Assignment_4/TeslaInvestR/data-raw"
+    "path": "~/Semester 2/ETC5523/Assignment_4/TeslaInvestR"
 }

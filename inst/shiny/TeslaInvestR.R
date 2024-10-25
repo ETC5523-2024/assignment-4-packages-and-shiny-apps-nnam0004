@@ -3,15 +3,21 @@ library(ggplot2)
 library(TeslaInvestR)  # Load your package
 
 # Load data directly from the package
-tesla_stock <- TeslaInvestR::tesla_stock
-roadster_value <- TeslaInvestR::roadster_value
+tesla_stock <- TeslaInvestR::filtered_tesla_stock
+roadster_value <- TeslaInvestR::filtered_roadster_value
+
+# Ensure date columns are in Date format
+tesla_stock$Date <- as.Date(tesla_stock$Date)
+roadster_value$date <- as.Date(roadster_value$date)
 
 ui <- fluidPage(
   titlePanel("Tesla Stock vs. Tesla Roadster: Investment Comparison"),
   sidebarLayout(
     sidebarPanel(
       # Input for Date Range
-      dateRangeInput("dateRange", "Select Date Range:", start = min(tesla_stock$date), end = max(tesla_stock$date)),
+      dateRangeInput("dateRange", "Select Date Range:",
+                     start = min(tesla_stock$Date),
+                     end = max(tesla_stock$Date)),
 
       # Radio button to choose investment type
       radioButtons("investment_type", "Choose Investment Type:",
@@ -32,18 +38,19 @@ server <- function(input, output) {
   filtered_data <- reactive({
     if (input$investment_type == "stock") {
       data <- tesla_stock
+      date_col <- "Date"  # Use "Date" column for tesla_stock
     } else {
       data <- roadster_value
+      date_col <- "date"  # Use "date" column for roadster_value
     }
 
-    # Check if the date range is valid and return the filtered data
-    filtered <- data[data$date >= input$dateRange[1] & data$date <= input$dateRange[2], ]
+    # Filter data based on date range
+    filtered <- data[data[[date_col]] >= input$dateRange[1] & data[[date_col]] <= input$dateRange[2], ]
 
-    # Return the filtered data or a message if no data is available
+    # Return filtered data or NULL if no data is available
     if (nrow(filtered) == 0) {
-      return(NULL)  # No data available
+      return(NULL)
     }
-
     return(filtered)
   })
 
@@ -57,15 +64,11 @@ server <- function(input, output) {
         labs(title = "No data available for the selected date range.") +
         theme_void()
     } else {
-      if (input$investment_type == "stock") {
-        ggplot(data, aes(x = date, y = investment_value)) +
-          geom_line(color = "blue") +
-          labs(title = "Tesla Stock Price", x = "Date", y = "Investment Value (USD)")
-      } else {
-        ggplot(data, aes(x = date, y = investment_value)) +
-          geom_line(color = "red") +
-          labs(title = "Tesla Roadster Value", x = "Date", y = "Depreciation Value (USD)")
-      }
+      ggplot(data, aes_string(x = if (input$investment_type == "stock") "Date" else "date",
+                              y = "investment_value")) +
+        geom_line(color = if (input$investment_type == "stock") "blue" else "red") +
+        labs(title = paste(input$investment_type == "stock" ? "Tesla Stock Price" : "Tesla Roadster Value"),
+             x = "Date", y = "Investment/Depreciation Value (USD)")
     }
   })
 
@@ -87,4 +90,3 @@ server <- function(input, output) {
 }
 
 shinyApp(ui = ui, server = server)
-

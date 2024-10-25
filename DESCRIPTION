@@ -2,9 +2,8 @@ Package: TeslaInvestR
 Type: Package
 Title: Tesla Stock vs. Car Investment Analysis
 Version: 0.1.0
-Author: Nahar Singh Namdhari
-Maintainer: The package maintainer <nnam0004@student.monash.edu>
-Description: This package allows users to compare the financial return on Tesla stock versus Tesla car investments.
+Authors@R: person("Nahar", "Namdhari", email = "nnam0004@student.monash.edu", role = c("aut", "cre"))
+Description: The TeslaInvestR package provides historical data and tools for analyzing Tesla stock trends and Tesla Roadster depreciation. The package includes datasets on Tesla stock prices and Roadster value depreciation, and provides functions for easy comparison.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true

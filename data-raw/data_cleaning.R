@@ -1,22 +1,22 @@
 # Load necessary libraries
-library(usethis)
 library(dplyr)
+library(usethis)
 
-# Load the tesla_stock data
-load("path/to/tesla_stock.rda")  # Replace with the correct path
+# Load the Tesla stock data from the CSV file
+tesla_stock <- read.csv("data-raw//TSLA.csv")
 
-# Inspect the Date column to determine its format
-head(tesla_stock$Date)
+# Convert the Date column to Date format (DD/MM/YY)
+tesla_stock$Date <- as.Date(tesla_stock$Date, format = "%d/%m/%y")
 
-# Ensure the date column is in Date format (adjust format string as needed)
-tesla_stock$date <- as.Date(tesla_stock$Date, format = "%Y-%m-%d")  # Change format if needed
+# Inspect the data to ensure Date conversion is correct
+head(tesla_stock)
 
-# Add an investment_value column (assuming initial investment)
-tesla_stock$investment_value <- tesla_stock$Adj_Close * 28385  # Assuming initial investment
+# Add an investment_value column (assuming an initial investment in 28385 shares)
+tesla_stock$investment_value <- tesla_stock$Adj_Close * 28385  # Assuming an initial investment
 
 # Filter Tesla stock data within a specific date range (for example: 2011-01-01 to 2023-12-31)
 filtered_tesla_stock <- tesla_stock %>%
-  filter(date >= as.Date("2011-01-01") & date <= as.Date("2023-12-31"))
+  filter(Date >= as.Date("2011-01-01") & Date <= as.Date("2023-12-31"))
 
 # Save the filtered Tesla stock data into the package
 usethis::use_data(filtered_tesla_stock, overwrite = TRUE)
@@ -29,7 +29,7 @@ roadster_value <- data.frame(
 
 # Filter Tesla Roadster data within a specific date range (for example: 2015-01-01 to 2020-12-31)
 filtered_roadster_value <- roadster_value %>%
-  filter(date >= as.Date("2015-01-01") & date <= as.Date("2020-12-31"))
+  filter(date >= as.Date("2010-01-01") & date <= as.Date("2024-12-31"))
 
 # Save the filtered Tesla Roadster depreciation data into the package
 usethis::use_data(filtered_roadster_value, overwrite = TRUE)
