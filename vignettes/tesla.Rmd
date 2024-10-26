@@ -7,6 +7,16 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
+```{r}
+# Vignette setup chunk
+library(dplyr)
+library(ggplot2)
+
+# Load data directly from the package
+tesla_stock_filtered <- TeslaInvestR::filtered_tesla_stock
+roadster_value_filtered <- TeslaInvestR::filtered_roadster_value
+```
+
 # Introduction
 
 The `TeslaInvestR` package provides functions and data related to Tesla stock and Roadster depreciation. The package allows users to explore investment trends in Tesla stock as well as the depreciation of Tesla Roadsters.
@@ -21,43 +31,32 @@ You can install the package from GitHub using:
 The package contains the tesla_stock dataset, which provides historical data on Tesla stock prices. You can interact with this dataset as follows:
 
 ```{r}
-head(tesla_stock)
+head(tesla_stock_filtered)
 ```
 
-## Roadster Depreciation
-
-The roadster_value dataset provides yearly data on the depreciation of the Tesla Roadster. You can analyze its trends using:
-
-```{r}
-plot(roadster_value$date, roadster_value$investment_value, type = "l",
-     main = "Tesla Roadster Depreciation", xlab = "Year", ylab = "Depreciation Value (USD)")
-```
 
 ## Example: Comparing Tesla Stock and Roadster Depreciation
 
 You can compare the trends in Tesla stock price and Roadster depreciation by plotting them together using ggplot2:
 ```{r}
-# Load necessary libraries
-library(ggplot2)
-library(dplyr)
 
 # Assuming tesla_stock and roadster_value are already loaded
 
 # Add an identifier to each dataset
-tesla_stock <- tesla_stock %>%
-  mutate(type = "Tesla Stock")
+tesla_stock_filtered <- tesla_stock_filtered %>%
+  dplyr::mutate(type = "Tesla Stock")
 
-roadster_value <- roadster_value %>%
-  mutate(type = "Tesla Roadster")
+roadster_value_filtered <- roadster_value_filtered %>%
+  dplyr::mutate(type = "Tesla Roadster")
 
 # Combine the two datasets into one
 combined_data <- bind_rows(
-  tesla_stock %>% select(Date, investment_value, type),
-  roadster_value %>% rename(Date = date) %>% select(Date, investment_value, type)
+  tesla_stock_filtered %>% dplyr::select(Date, investment_value, type),
+  roadster_value_filtered %>% dplyr::rename(Date = date) %>% dplyr::select(Date, investment_value, type)
 )
 
 # Plot with facets
-ggplot(combined_data, aes(x = Date, y = investment_value, color = type)) +
+ggplot2::ggplot(combined_data, aes(x = Date, y = investment_value, color = type)) +
   geom_line() +
   labs(title = "Comparison of Tesla Stock and Roadster Depreciation",
        x = "Date", y = "Value") +

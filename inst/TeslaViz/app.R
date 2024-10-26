@@ -1,7 +1,6 @@
 library(shiny)
 library(shinydashboard)
 library(ggplot2)
-library(TeslaInvestR)  # Load your package
 
 # Load data directly from the package
 tesla_stock_filtered <- TeslaInvestR::filtered_tesla_stock

@@ -1,0 +1,32 @@
+pkgdown:
+  title: "TeslaInvestR"
+  description: "Analyze Tesla stock trends and Roadster depreciation using interactive tools and data."
+
+url: https://yourusername.github.io/yourrepositoryname/  # Replace with your actual URL
+
+template:
+  bootstrap: 5
+  bootswatch: flatly  # Choose a theme, e.g., "minty" or "cosmo"
+
+navbar:
+  structure:
+    left:
+      - reference
+      - articles
+      - "https://github.com/yourusername/yourrepositoryname"  # Replace with GitHub repo link
+
+reference:
+  - title: "Function Reference"
+    contents:
+      - calculate_investment_value
+      - filter_by_date_range
+      - smooth_investment_data
+      - TeslaViz
+      - filtered_tesla_stock
+      - filtered_roadster_value
+      - launch_shiny_app
+
+articles:
+  - title: "Using TeslaInvestR"
+    contents:
+      - "tesla"
