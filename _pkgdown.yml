@@ -1,4 +1,5 @@
 pkgdown:
+  output-dir: docs
   title: "TeslaInvestR"
   description: "Analyze Tesla stock trends and Roadster depreciation using interactive tools and data."
 
@@ -6,7 +7,7 @@ url: https://yourusername.github.io/yourrepositoryname/  # Replace with your act
 
 template:
   bootstrap: 5
-  bootswatch: flatly  # Choose a theme, e.g., "minty" or "cosmo"
+  bootswatch: flatly
 
 navbar:
   structure:
