@@ -74,7 +74,9 @@ The package includes a dataset on the depreciation values of Tesla Roadsters, al
 ### Data Preparation
 
 To create a comparison plot, we’ll:
+
 1. Add an identifier for each dataset (`type` column).
+
 2. Combine the `tesla_stock_filtered` and `roadster_value_filtered` datasets into one data frame.
 
 ```{r}
@@ -123,5 +125,3 @@ This side-by-side visualization provides an intuitive comparison of how Tesla st
 The `TeslaInvestR` package provides preprocessed datasets and functions that allow for easy exploration and visualization of Tesla's stock performance and the depreciation of Tesla Roadsters. This vignette demonstrated how to load the data, prepare it for analysis, and visualize these trends using `ggplot2`.
 
 By using `TeslaInvestR`, users can quickly gain insights into Tesla's investment trends and make comparisons between stock and vehicle depreciation.
-
-For full documentation and tutorials, visit the pkgdown site here: [TeslaInvestR Documentation](https://etc5523-2024.github.io/assignment-4-packages-and-shiny-apps-nnam0004/).

@@ -141,10 +141,14 @@ depreciation.</p>
 <div class="section level4">
 <h4 id="data-preparation">Data Preparation<a class="anchor" aria-label="anchor" href="#data-preparation"></a>
 </h4>
-<p>To create a comparison plot, we’ll: 1. Add an identifier for each
-dataset (<code>type</code> column). 2. Combine the
-<code>tesla_stock_filtered</code> and
-<code>roadster_value_filtered</code> datasets into one data frame.</p>
+<p>To create a comparison plot, we’ll:</p>
+<ol style="list-style-type: decimal">
+<li><p>Add an identifier for each dataset (<code>type</code>
+column).</p></li>
+<li><p>Combine the <code>tesla_stock_filtered</code> and
+<code>roadster_value_filtered</code> datasets into one data
+frame.</p></li>
+</ol>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Add identifier columns</span></span>
 <span><span class="va">tesla_stock_filtered</span> <span class="op">&lt;-</span> <span class="va">tesla_stock_filtered</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
@@ -207,8 +211,6 @@ visualize these trends using <code>ggplot2</code>.</p>
 <p>By using <code>TeslaInvestR</code>, users can quickly gain insights
 into Tesla’s investment trends and make comparisons between stock and
 vehicle depreciation.</p>
-<p>For full documentation and tutorials, visit the pkgdown site here: <a href="https://etc5523-2024.github.io/assignment-4-packages-and-shiny-apps-nnam0004/" class="external-link">TeslaInvestR
-Documentation</a>.</p>
 </div>
 </div>
   </div>
