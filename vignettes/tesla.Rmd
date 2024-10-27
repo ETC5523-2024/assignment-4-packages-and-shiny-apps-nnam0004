@@ -21,6 +21,7 @@ You can install the package from GitHub using:
 The package contains the tesla_stock dataset, which provides historical data on Tesla stock prices. You can interact with this dataset as follows:
 
 ```{r}
+library(TeslaInvestR)
 head(tesla_stock)
 ```
 
