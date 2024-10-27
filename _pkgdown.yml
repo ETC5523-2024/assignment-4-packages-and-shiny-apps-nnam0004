@@ -1,5 +1,4 @@
 pkgdown:
-  output-dir: docs
   title: "TeslaInvestR"
   description: "Analyze Tesla stock trends and Roadster depreciation using interactive tools and data."
 
