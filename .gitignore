@@ -3,3 +3,8 @@ inst/doc
 docs
 /doc/
 /Meta/
+.Rhistory
+.Rdata
+.httr-oauth
+.DS_Store
+.quarto

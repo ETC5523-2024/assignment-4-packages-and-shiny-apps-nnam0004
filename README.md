@@ -1,8 +1,4 @@
 
-``` r
-knitr::opts_chunk$set(eval = FALSE)
-```
-
 # TeslaInvestR
 
 ## Overview
@@ -28,10 +24,11 @@ comparisons using `ggplot2` and an interactive Shiny app.
 You can install the **TeslaInvestR** package from GitHub using the
 following command:
 
-``` r
+```{r}
 # Install TeslaInvestR from GitHub
 remotes::install_github("nnam0004/TeslaInvestR")
 ```
+
 
 ## Usage
 
