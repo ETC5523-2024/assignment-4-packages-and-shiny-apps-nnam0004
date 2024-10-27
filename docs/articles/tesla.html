@@ -93,16 +93,15 @@ visualization of Tesla-related investments.</p>
 </h3>
 <p>To install <code>TeslaInvestR</code> from GitHub, use the following
 commands:</p>
-<pre><code><span><span class="co">## </span></span>
-<span><span class="co">## The downloaded binary packages are in</span></span>
-<span><span class="co">##  /var/folders/qc/0w7_4__56tj_pnm2_bqbhttr0000gn/T//RtmpwLSUxq/downloaded_packages</span></span></code></pre>
-<pre><code><span><span class="co">## <span style="color: #00BBBB;">──</span> <span style="color: #00BBBB;">R CMD build</span> <span style="color: #00BBBB;">─────────────────────────────────────────────────────────────────</span></span></span>
-<span><span class="co">## * checking for file ‘/private/var/folders/qc/0w7_4__56tj_pnm2_bqbhttr0000gn/T/RtmpwLSUxq/remotes5e662005fbc7/ETC5523-2024-assignment-4-packages-and-shiny-apps-nnam0004-9b870b9/DESCRIPTION’ ... OK</span></span>
-<span><span class="co">## * preparing ‘TeslaInvestR’:</span></span>
-<span><span class="co">## * checking DESCRIPTION meta-information ... OK</span></span>
-<span><span class="co">## * checking for LF line-endings in source and make files and shell scripts</span></span>
-<span><span class="co">## * checking for empty or unneeded directories</span></span>
-<span><span class="co">## * building ‘TeslaInvestR_0.1.0.tar.gz’</span></span></code></pre>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Specify a CRAN mirror and install 'remotes'</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"remotes"</span>, repos <span class="op">=</span> <span class="st">"https://cloud.r-project.org/"</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Install TeslaInvestR</span></span>
+<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"ETC5523-2024/assignment-4-packages-and-shiny-apps-nnam0004"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Example of running the Shiny app</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">TeslaInvestR</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="loading-data-and-libraries">Loading Data and Libraries<a class="anchor" aria-label="anchor" href="#loading-data-and-libraries"></a>
@@ -116,20 +115,8 @@ datasets provided by <code>TeslaInvestR</code>.</p>
 <p>The <code>tesla_stock_filtered</code> dataset contains historical
 data on Tesla’s stock prices. We can take a quick look at the structure
 of the dataset using <code><a href="https://rdrr.io/r/utils/head.html" class="external-link">head()</a></code>.</p>
-<pre><code><span><span class="co">##         Date     Open     High      Low    Close Adj_Close   Volume</span></span>
-<span><span class="co">## 1 2011-01-03 1.789333 1.800000 1.726667 1.774667  1.774667 19245000</span></span>
-<span><span class="co">## 2 2011-01-04 1.777333 1.796667 1.734667 1.778000  1.778000 17811000</span></span>
-<span><span class="co">## 3 2011-01-05 1.765333 1.793333 1.746000 1.788667  1.788667 21700500</span></span>
-<span><span class="co">## 4 2011-01-06 1.788667 1.866667 1.787333 1.858667  1.858667 30918000</span></span>
-<span><span class="co">## 5 2011-01-07 1.866667 1.905333 1.860000 1.882667  1.882667 33718500</span></span>
-<span><span class="co">## 6 2011-01-10 1.878000 1.912000 1.870000 1.896667  1.896667 20140500</span></span>
-<span><span class="co">##   investment_value</span></span>
-<span><span class="co">## 1         50373.92</span></span>
-<span><span class="co">## 2         50468.53</span></span>
-<span><span class="co">## 3         50771.31</span></span>
-<span><span class="co">## 4         52758.26</span></span>
-<span><span class="co">## 5         53439.50</span></span>
-<span><span class="co">## 6         53836.89</span></span></code></pre>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">tesla_stock_filtered</span><span class="op">)</span></span></code></pre></div>
 <div class="section level4">
 <h4 id="data-description">Data Description<a class="anchor" aria-label="anchor" href="#data-description"></a>
 </h4>
@@ -158,6 +145,19 @@ depreciation.</p>
 dataset (<code>type</code> column). 2. Combine the
 <code>tesla_stock_filtered</code> and
 <code>roadster_value_filtered</code> datasets into one data frame.</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Add identifier columns</span></span>
+<span><span class="va">tesla_stock_filtered</span> <span class="op">&lt;-</span> <span class="va">tesla_stock_filtered</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>type <span class="op">=</span> <span class="st">"Tesla Stock"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">roadster_value_filtered</span> <span class="op">&lt;-</span> <span class="va">roadster_value_filtered</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>type <span class="op">=</span> <span class="st">"Tesla Roadster"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Combine datasets for plotting</span></span>
+<span><span class="va">combined_data</span> <span class="op">&lt;-</span> <span class="fu">bind_rows</span><span class="op">(</span></span>
+<span>  <span class="va">tesla_stock_filtered</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">Date</span>, <span class="va">investment_value</span>, <span class="va">type</span><span class="op">)</span>,</span>
+<span>  <span class="va">roadster_value_filtered</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html" class="external-link">rename</a></span><span class="op">(</span>Date <span class="op">=</span> <span class="va">date</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">Date</span>, <span class="va">investment_value</span>, <span class="va">type</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="visualization-tesla-stock-vs--roadster-depreciation">Visualization: Tesla Stock vs. Roadster Depreciation<a class="anchor" aria-label="anchor" href="#visualization-tesla-stock-vs--roadster-depreciation"></a>
@@ -165,6 +165,19 @@ dataset (<code>type</code> column). 2. Combine the
 <p>Using <code>ggplot2</code>, we can plot the investment value over
 time for both Tesla stock and Roadster depreciation. We’ll use
 <code>facet_wrap</code> to separate the plots for easier comparison.</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">combined_data</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Date</span>, y <span class="op">=</span> <span class="va">investment_value</span>, color <span class="op">=</span> <span class="va">type</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span></span>
+<span>    title <span class="op">=</span> <span class="st">"Comparison of Tesla Stock and Roadster Depreciation Over Time"</span>,</span>
+<span>    x <span class="op">=</span> <span class="st">"Date"</span>, y <span class="op">=</span> <span class="st">"Value (USD)"</span></span>
+<span>  <span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html" class="external-link">facet_wrap</a></span><span class="op">(</span><span class="op">~</span><span class="va">type</span>, scales <span class="op">=</span> <span class="st">"free_y"</span><span class="op">)</span> <span class="op">+</span>  <span class="co"># Separate plots for stock and roadster</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_minimal</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span></span>
+<span>    plot.title <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_text</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">14</span>, face <span class="op">=</span> <span class="st">"bold"</span>, hjust <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span>,</span>
+<span>    legend.position <span class="op">=</span> <span class="st">"none"</span></span>
+<span>  <span class="op">)</span></span></code></pre></div>
 <p><img src="tesla_files/figure-html/unnamed-chunk-6-1.png" width="700"></p>
 </div>
 <div class="section level4">
@@ -194,9 +207,8 @@ visualize these trends using <code>ggplot2</code>.</p>
 <p>By using <code>TeslaInvestR</code>, users can quickly gain insights
 into Tesla’s investment trends and make comparisons between stock and
 vehicle depreciation.</p>
-<p>For additional examples and information, refer to the package
-documentation or the <a href="https://yourusername.github.io/TeslaInvestR/" class="external-link">pkgdown site</a>. #
-Replace ‘yourusername’ with your GitHub username ```</p>
+<p>For full documentation and tutorials, visit the pkgdown site here: <a href="https://etc5523-2024.github.io/assignment-4-packages-and-shiny-apps-nnam0004/" class="external-link">TeslaInvestR
+Documentation</a>.</p>
 </div>
 </div>
   </div>
