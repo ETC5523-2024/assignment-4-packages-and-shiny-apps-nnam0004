@@ -7,8 +7,15 @@ knitr::opts_chunk$set(
   echo = TRUE,        # Hide code output by default
   warning = FALSE,     # Suppress warnings in the output
   message = FALSE,     # Suppress messages in the output
-  error = FALSE,
-  eval = FALSE)      
+  error = FALSE)      
+
+library(dplyr)
+library(ggplot2)
+library(TeslaInvestR)
+
+# Load data directly from the package
+tesla_stock_filtered <- TeslaInvestR::filtered_tesla_stock
+roadster_value_filtered <- TeslaInvestR::filtered_roadster_value
 ```
 
 # TeslaInvestR
@@ -42,7 +49,7 @@ remotes::install_github("ETC5523-2024/assignment-4-packages-and-shiny-apps-nnam0
 
 Run the Shiny app to interactively explore Tesla investment data:
 
-```{r}
+```{r eval=FALSE}
 library(TeslaInvestR)
 launch_shiny_app()
 ```
@@ -50,18 +57,18 @@ launch_shiny_app()
 ### 2. Comparing Stock and Depreciation Data with ggplot2
 
 ```{r}
-library(ggplot2)
-# Load filtered data for analysis
-tesla_data <- TeslaInvestR::filtered_tesla_stock
-roadster_data <- TeslaInvestR::filtered_roadster_value
+# Add identifier columns
+tesla_stock_filtered <- tesla_stock_filtered %>%
+  dplyr::mutate(type = "Tesla Stock")
 
-# Plotting Tesla stock vs. Roadster depreciation over time
-ggplot() +
-  geom_line(data = tesla_data, aes(x = Date, y = investment_value), color = "blue") +
-  geom_line(data = roadster_data, aes(x = date, y = investment_value), color = "red") +
-  labs(title = "Tesla Stock Investment vs. Roadster Depreciation",
-       x = "Date", y = "Value (USD)") +
-  theme_minimal()
+roadster_value_filtered <- roadster_value_filtered %>%
+  dplyr::mutate(type = "Tesla Roadster")
+
+# Combine datasets for plotting
+combined_data <- bind_rows(
+  tesla_stock_filtered %>% dplyr::select(Date, investment_value, type),
+  roadster_value_filtered %>% dplyr::rename(Date = date) %>% dplyr::select(Date, investment_value, type)
+)
 ```
 
 ## Data Sources

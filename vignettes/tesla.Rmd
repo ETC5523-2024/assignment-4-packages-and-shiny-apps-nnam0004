@@ -7,13 +7,12 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-```{r setup, include = FALSE}
+```{r setup, include=FALSE}
 knitr::opts_chunk$set(
-  warning = FALSE,
-  message = FALSE,
-  error = FALSE,
-  echo = FALSE
-)
+  echo = TRUE,        # Hide code output by default
+  warning = FALSE,     # Suppress warnings in the output
+  message = FALSE,     # Suppress messages in the output
+  error = FALSE)      
 ```
 
 # Introduction
@@ -44,7 +43,7 @@ library(TeslaInvestR)
 
 After installing the package, load the necessary libraries and the datasets provided by `TeslaInvestR`.
 
-```{r}
+```{r echo=FALSE}
 library(dplyr)
 library(ggplot2)
 library(TeslaInvestR)
@@ -58,7 +57,7 @@ roadster_value_filtered <- TeslaInvestR::filtered_roadster_value
 
 The `tesla_stock_filtered` dataset contains historical data on Tesla's stock prices. We can take a quick look at the structure of the dataset using `head()`.
 
-```{r}
+```{r eval=FALSE}
 head(tesla_stock_filtered)
 ```
 
@@ -125,5 +124,4 @@ The `TeslaInvestR` package provides preprocessed datasets and functions that all
 
 By using `TeslaInvestR`, users can quickly gain insights into Tesla's investment trends and make comparisons between stock and vehicle depreciation.
 
-For additional examples and information, refer to the package documentation or the [pkgdown site](https://yourusername.github.io/TeslaInvestR/).  # Replace 'yourusername' with your GitHub username
-```
+For full documentation and tutorials, visit the pkgdown site here: [TeslaInvestR Documentation](https://etc5523-2024.github.io/assignment-4-packages-and-shiny-apps-nnam0004/).

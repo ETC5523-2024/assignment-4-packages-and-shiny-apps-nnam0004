@@ -19,10 +19,10 @@ ui <- dashboardPage(
     )
   ),
   dashboardBody(
-    # Custom CSS to style background and panels
+    # Custom CSS to style background and panels with a pastel color
     tags$head(
       tags$style(HTML("
-        body, .content-wrapper { background-color: #f0f2f5; }
+        body, .content-wrapper { background-color: #f2f7f7; } /* Light pastel blue */
         .box { background-color: #ffffff; border-radius: 8px; padding: 15px; }
         .box-primary { border-top: 3px solid #007bff; }
         .box-info { border-top: 3px solid #17a2b8; }

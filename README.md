@@ -50,18 +50,18 @@ launch_shiny_app()
 ### 2. Comparing Stock and Depreciation Data with ggplot2
 
 ``` r
-library(ggplot2)
-# Load filtered data for analysis
-tesla_data <- TeslaInvestR::filtered_tesla_stock
-roadster_data <- TeslaInvestR::filtered_roadster_value
+# Add identifier columns
+tesla_stock_filtered <- tesla_stock_filtered %>%
+  dplyr::mutate(type = "Tesla Stock")
 
-# Plotting Tesla stock vs. Roadster depreciation over time
-ggplot() +
-  geom_line(data = tesla_data, aes(x = Date, y = investment_value), color = "blue") +
-  geom_line(data = roadster_data, aes(x = date, y = investment_value), color = "red") +
-  labs(title = "Tesla Stock Investment vs. Roadster Depreciation",
-       x = "Date", y = "Value (USD)") +
-  theme_minimal()
+roadster_value_filtered <- roadster_value_filtered %>%
+  dplyr::mutate(type = "Tesla Roadster")
+
+# Combine datasets for plotting
+combined_data <- bind_rows(
+  tesla_stock_filtered %>% dplyr::select(Date, investment_value, type),
+  roadster_value_filtered %>% dplyr::rename(Date = date) %>% dplyr::select(Date, investment_value, type)
+)
 ```
 
 ## Data Sources
