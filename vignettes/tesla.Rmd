@@ -25,7 +25,7 @@ In this vignette, we will demonstrate how to use `TeslaInvestR` for data explora
 
 To install `TeslaInvestR` from GitHub, use the following commands:
 
-```{r}
+```{r eval=FALSE}
 # Specify a CRAN mirror and install 'remotes'
 install.packages("remotes", repos = "https://cloud.r-project.org/")
 ```
