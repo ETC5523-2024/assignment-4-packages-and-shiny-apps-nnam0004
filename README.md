@@ -44,6 +44,7 @@ Run the Shiny app to interactively explore Tesla investment data:
 
 ``` r
 library(TeslaInvestR)
+launch_shiny_app()
 ```
 
 ### 2. Comparing Stock and Depreciation Data with ggplot2
@@ -63,8 +64,6 @@ ggplot() +
   theme_minimal()
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-3-1.png)<!-- -->
-
 ## Data Sources
 
 - **Tesla Stock Data**: Sourced from Yahoo Finance, covering the period
@@ -81,3 +80,9 @@ for details.
 
 Contributions are welcome! Feel free to fork the repository, submit pull
 requests, or report issues to help improve the package.
+
+## Documentation
+
+For full documentation and tutorials, visit the pkgdown site here:
+[TeslaInvestR
+Documentation](https://etc5523-2024.github.io/assignment-4-packages-and-shiny-apps-nnam0004/).
