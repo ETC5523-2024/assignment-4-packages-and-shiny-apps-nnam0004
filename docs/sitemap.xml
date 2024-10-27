@@ -1,0 +1,18 @@
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>/404.html</loc></url>
+<url><loc>/LICENSE-text.html</loc></url>
+<url><loc>/articles/index.html</loc></url>
+<url><loc>/articles/tesla.html</loc></url>
+<url><loc>/authors.html</loc></url>
+<url><loc>/index.html</loc></url>
+<url><loc>/reference/TeslaViz.html</loc></url>
+<url><loc>/reference/calculate_investment_value.html</loc></url>
+<url><loc>/reference/filter_by_date_range.html</loc></url>
+<url><loc>/reference/filtered_roadster_value.html</loc></url>
+<url><loc>/reference/filtered_tesla_stock.html</loc></url>
+<url><loc>/reference/index.html</loc></url>
+<url><loc>/reference/launch_shiny_app.html</loc></url>
+<url><loc>/reference/pipe.html</loc></url>
+<url><loc>/reference/smooth_investment_data.html</loc></url>
+</urlset>
+

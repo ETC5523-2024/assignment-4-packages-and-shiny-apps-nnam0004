@@ -7,67 +7,123 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  warning = FALSE,
+  message = FALSE,
+  error = FALSE,
+  echo = FALSE
+)
+```
+
 # Introduction
 
-The `TeslaInvestR` package provides functions and data related to Tesla stock and Roadster depreciation. The package allows users to explore investment trends in Tesla stock as well as the depreciation of Tesla Roadsters.
+The `TeslaInvestR` package provides data and tools for analyzing Tesla's historical stock prices and the depreciation trends of Tesla Roadsters. The package includes preprocessed datasets and functions that enable users to visualize and explore these financial trends interactively.
+
+In this vignette, we will demonstrate how to use `TeslaInvestR` for data exploration, analysis, and visualization of Tesla-related investments.
 
 ## Package Installation
 
-You can install the package from GitHub using:
-
-
-## Working with Tesla Stock Data
-
-The package contains the tesla_stock dataset, which provides historical data on Tesla stock prices. You can interact with this dataset as follows:
+To install `TeslaInvestR` from GitHub, use the following commands:
 
 ```{r}
+# Specify a CRAN mirror and install 'remotes'
+install.packages("remotes", repos = "https://cloud.r-project.org/")
+```
+
+```{r}
+# Install TeslaInvestR
+remotes::install_github("ETC5523-2024/assignment-4-packages-and-shiny-apps-nnam0004")
+
+# Example of running the Shiny app
 library(TeslaInvestR)
-head(tesla_stock)
+
 ```
 
-## Roadster Depreciation
+## Loading Data and Libraries
 
-The roadster_value dataset provides yearly data on the depreciation of the Tesla Roadster. You can analyze its trends using:
+After installing the package, load the necessary libraries and the datasets provided by `TeslaInvestR`.
 
 ```{r}
-plot(roadster_value$date, roadster_value$investment_value, type = "l",
-     main = "Tesla Roadster Depreciation", xlab = "Year", ylab = "Depreciation Value (USD)")
-```
-
-## Example: Comparing Tesla Stock and Roadster Depreciation
-
-You can compare the trends in Tesla stock price and Roadster depreciation by plotting them together using ggplot2:
-```{r}
-# Load necessary libraries
-library(ggplot2)
 library(dplyr)
+library(ggplot2)
+library(TeslaInvestR)
 
-# Assuming tesla_stock and roadster_value are already loaded
-
-# Add an identifier to each dataset
-tesla_stock <- tesla_stock %>%
-  mutate(type = "Tesla Stock")
-
-roadster_value <- roadster_value %>%
-  mutate(type = "Tesla Roadster")
-
-# Combine the two datasets into one
-combined_data <- bind_rows(
-  tesla_stock %>% select(Date, investment_value, type),
-  roadster_value %>% rename(Date = date) %>% select(Date, investment_value, type)
-)
-
-# Plot with facets
-ggplot(combined_data, aes(x = Date, y = investment_value, color = type)) +
-  geom_line() +
-  labs(title = "Comparison of Tesla Stock and Roadster Depreciation",
-       x = "Date", y = "Value") +
-  facet_wrap(~type, scales = "free_y") +  # Facet by the type (Tesla Stock and Tesla Roadster)
-  theme_minimal()
-
+# Load data directly from the package
+tesla_stock_filtered <- TeslaInvestR::filtered_tesla_stock
+roadster_value_filtered <- TeslaInvestR::filtered_roadster_value
 ```
+
+## Exploring Tesla Stock Data
+
+The `tesla_stock_filtered` dataset contains historical data on Tesla's stock prices. We can take a quick look at the structure of the dataset using `head()`.
+
+```{r}
+head(tesla_stock_filtered)
+```
+
+### Data Description
+
+- **Date**: The date of each observation.
+- **Adj_Close**: Adjusted closing price of Tesla stock on that date.
+- **investment_value**: Calculated investment value based on the adjusted closing price.
+
+## Example: Comparing Tesla Stock Prices and Roadster Depreciation
+
+The package includes a dataset on the depreciation values of Tesla Roadsters, allowing us to compare the stock's growth to the car's depreciation.
+
+### Data Preparation
+
+To create a comparison plot, we’ll:
+1. Add an identifier for each dataset (`type` column).
+2. Combine the `tesla_stock_filtered` and `roadster_value_filtered` datasets into one data frame.
+
+```{r}
+# Add identifier columns
+tesla_stock_filtered <- tesla_stock_filtered %>%
+  dplyr::mutate(type = "Tesla Stock")
+
+roadster_value_filtered <- roadster_value_filtered %>%
+  dplyr::mutate(type = "Tesla Roadster")
+
+# Combine datasets for plotting
+combined_data <- bind_rows(
+  tesla_stock_filtered %>% dplyr::select(Date, investment_value, type),
+  roadster_value_filtered %>% dplyr::rename(Date = date) %>% dplyr::select(Date, investment_value, type)
+)
+```
+
+### Visualization: Tesla Stock vs. Roadster Depreciation
+
+Using `ggplot2`, we can plot the investment value over time for both Tesla stock and Roadster depreciation. We'll use `facet_wrap` to separate the plots for easier comparison.
+
+```{r}
+ggplot2::ggplot(combined_data, aes(x = Date, y = investment_value, color = type)) +
+  geom_line(size = 1) +
+  labs(
+    title = "Comparison of Tesla Stock and Roadster Depreciation Over Time",
+    x = "Date", y = "Value (USD)"
+  ) +
+  facet_wrap(~type, scales = "free_y") +  # Separate plots for stock and roadster
+  theme_minimal() +
+  theme(
+    plot.title = element_text(size = 14, face = "bold", hjust = 0.5),
+    legend.position = "none"
+  )
+```
+
+### Interpretation of the Plot
+
+- **Tesla Stock**: The stock plot illustrates the upward trend in Tesla’s stock price over time, reflecting growth in Tesla's market value.
+- **Tesla Roadster**: The Roadster depreciation plot shows a downward trend, typical of vehicle depreciation over time.
+
+This side-by-side visualization provides an intuitive comparison of how Tesla stock has appreciated while the Roadster has depreciated.
 
 ## Conclusion
 
-The TeslaInvestR package provides useful data and tools for analyzing the historical trends in Tesla stock and the depreciation of Tesla Roadsters.
+The `TeslaInvestR` package provides preprocessed datasets and functions that allow for easy exploration and visualization of Tesla's stock performance and the depreciation of Tesla Roadsters. This vignette demonstrated how to load the data, prepare it for analysis, and visualize these trends using `ggplot2`.
 
+By using `TeslaInvestR`, users can quickly gain insights into Tesla's investment trends and make comparisons between stock and vehicle depreciation.
+
+For additional examples and information, refer to the package documentation or the [pkgdown site](https://yourusername.github.io/TeslaInvestR/).  # Replace 'yourusername' with your GitHub username
+```

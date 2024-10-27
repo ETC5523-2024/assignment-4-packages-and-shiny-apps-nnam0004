@@ -67,15 +67,91 @@
 
       </header><div class="row">
   <div class="contents col-md-9">
-
+<div class="section level1">
+<div class="page-header"><h1 id="teslainvestr">TeslaInvestR<a class="anchor" aria-label="anchor" href="#teslainvestr"></a>
+</h1></div>
+<div class="section level2">
+<h2 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
+</h2>
+<p><strong>TeslaInvestR</strong> is an R package designed for analyzing Tesla investment data. It provides users with access to historical Tesla stock price data and Tesla Roadster depreciation data, enabling direct comparisons between stock investment growth and vehicle depreciation. The package includes easy-to-use functions for financial analysis, interactive data visualization with <code>ggplot2</code>, and a user-friendly Shiny app.</p>
+</div>
+<div class="section level2">
+<h2 id="key-features">Key Features<a class="anchor" aria-label="anchor" href="#key-features"></a>
+</h2>
+<ul>
+<li><p><strong>Tesla Stock Data</strong>: Access Tesla stock price data from 2011 to 2023, including adjusted close prices and computed investment values based on an initial investment.</p></li>
+<li><p><strong>Tesla Roadster Depreciation Data</strong>: View simulated annual depreciation values for Tesla Roadsters from 2010 to 2024.</p></li>
+<li><p><strong>Interactive Visualization</strong>: Use the Shiny app to explore and compare Tesla stock and Roadster depreciation trends in real time, including adjustable date ranges and investment type filtering.</p></li>
+<li><p><strong>Analysis Tools</strong>: Built-in functions for filtering data by date, calculating investment growth, and visualizing both stock and depreciation data.</p></li>
+</ul>
+</div>
+<div class="section level2">
+<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
+</h2>
+<p>Install the <strong>TeslaInvestR</strong> package directly from GitHub:</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Install TeslaInvestR from GitHub</span></span>
+<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"ETC5523-2024/assignment-4-packages-and-shiny-apps-nnam0004"</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div class="section level2">
+<h2 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a>
+</h2>
+<div class="section level3">
+<h3 id="id_1-launching-the-shiny-app">1. Launching the Shiny App<a class="anchor" aria-label="anchor" href="#id_1-launching-the-shiny-app"></a>
+</h3>
+<p>Run the Shiny app to interactively explore Tesla investment data:</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">TeslaInvestR</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="id_2-comparing-stock-and-depreciation-data-with-ggplot2">2. Comparing Stock and Depreciation Data with ggplot2<a class="anchor" aria-label="anchor" href="#id_2-comparing-stock-and-depreciation-data-with-ggplot2"></a>
+</h3>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
+<span><span class="co"># Load filtered data for analysis</span></span>
+<span><span class="va">tesla_data</span> <span class="op">&lt;-</span> <span class="fu">TeslaInvestR</span><span class="fu">::</span><span class="va"><a href="reference/filtered_tesla_stock.html">filtered_tesla_stock</a></span></span>
+<span><span class="va">roadster_data</span> <span class="op">&lt;-</span> <span class="fu">TeslaInvestR</span><span class="fu">::</span><span class="va"><a href="reference/filtered_roadster_value.html">filtered_roadster_value</a></span></span>
+<span></span>
+<span><span class="co"># Plotting Tesla stock vs. Roadster depreciation over time</span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">tesla_data</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Date</span>, y <span class="op">=</span> <span class="va">investment_value</span><span class="op">)</span>, color <span class="op">=</span> <span class="st">"blue"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">roadster_data</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">date</span>, y <span class="op">=</span> <span class="va">investment_value</span><span class="op">)</span>, color <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Tesla Stock Investment vs. Roadster Depreciation"</span>,</span>
+<span>       x <span class="op">=</span> <span class="st">"Date"</span>, y <span class="op">=</span> <span class="st">"Value (USD)"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_minimal</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<p><img src="README_files/figure-gfm/unnamed-chunk-3-1.png"><!-- --></p>
+</div>
+</div>
+<div class="section level2">
+<h2 id="data-sources">Data Sources<a class="anchor" aria-label="anchor" href="#data-sources"></a>
+</h2>
+<ul>
+<li>
+<strong>Tesla Stock Data</strong>: Sourced from Yahoo Finance, covering the period from 2011 to 2023.</li>
+<li>
+<strong>Tesla Roadster Depreciation Data</strong>: Simulated data representing yearly depreciation of Tesla Roadsters from 2010 to 2024.</li>
+</ul>
+</div>
+<div class="section level2">
+<h2 id="license">License<a class="anchor" aria-label="anchor" href="#license"></a>
+</h2>
+<p>This project is licensed under the MIT License. See the <code>LICENSE</code> file for details.</p>
+</div>
+<div class="section level2">
+<h2 id="contributions">Contributions<a class="anchor" aria-label="anchor" href="#contributions"></a>
+</h2>
+<p>Contributions are welcome! Feel free to fork the repository, submit pull requests, or report issues to help improve the package.</p>
+</div>
+</div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <div class="license">
 <h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
-<li><a href="LICENSE.html">Full license</a></li>
-<li><small><a href="https://opensource.org/licenses/mit-license.php" class="external-link">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a></small></li>
+<li>
+<a href="https://opensource.org/licenses/mit-license.php" class="external-link">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a>
+</li>
 </ul>
 </div>
 
